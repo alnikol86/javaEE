@@ -6,8 +6,8 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "First Servlet", value = "/first-servlet")
-public class Servlet extends HttpServlet {
+@WebServlet(name = "Test Servlet", value = "/test-servlet")
+public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
@@ -18,6 +18,10 @@ public class Servlet extends HttpServlet {
         pw.println("<html>");
         pw.println("<h1> Hello " + name + " " + surname + "! </h1>");
         pw.println("</html>");
+
+//        response.sendRedirect("https://google.com");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/test-jsp");
+        dispatcher.forward(request, response);
     }
 
     @Override
