@@ -13,13 +13,18 @@
 <body>
     <h1>Testing JSP</h1>
     <p>
+<%--        page directives--%>
+        <%@ page import="java.util.Date,
+        ru.nikolaev.javaEE.logic.TestClass" %>
         <%
             for (int i = 0; i < 10; i++) {
                 out.println("<p>" + "Hello: " + i + "</p>");
             }
-            java.util.Date date = new java.util.Date();
+            Date date = new Date();
+            TestClass tc = new TestClass();
         %>
         <%= "Today: " + date %>
+        <%= "<p>" + tc.getInfo() + "</p>" %>
     </p>
 </body>
 </html>
