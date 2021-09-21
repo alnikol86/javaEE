@@ -1,5 +1,7 @@
 package ru.nikolaev.javaEE;
 
+import ru.nikolaev.javaEE.logic.Cart;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -12,28 +14,27 @@ public class TestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        Integer count = (Integer) session.getAttribute("count");
+        Cart cart = (Cart) session.getAttribute("cart");
 
-        if (count == null) {
-            session.setAttribute("count", 1);
-            count = 1;
-        } else {
-            session.setAttribute("count", count + 1);
+        String name = request.getParameter("name");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+
+        if (cart == null) {
+            cart = new Cart();
+
+            cart.setName(name);
+            cart.setQuantity(quantity);
         }
 
-//        String name = request.getParameter("name");
-//        String surname = request.getParameter("surname");
+        session.setAttribute("cart", cart);
 
-        PrintWriter pw = response.getWriter();
+//        PrintWriter pw = response.getWriter();
+//
+//        pw.println("<html>");
+//        pw.println("<h1> Your count is: " +  + " </h1>");
+//        pw.println("</html>");
 
-        pw.println("<html>");
-        pw.println("<h1> Your count is: " + count + " </h1>");
-//        pw.println("<h1> Hello " + name + " " + surname + "! </h1>");
-        pw.println("</html>");
-
-//        response.sendRedirect("https://google.com");
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("/test-jsp");
-//        dispatcher.forward(request, response);
+        getServletContext().getRequestDispatcher("/showCart.jsp").forward(request, response);
     }
 
     @Override
