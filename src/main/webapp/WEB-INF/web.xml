@@ -35,4 +35,12 @@
         <servlet-name>DeleteCookiesServlet</servlet-name>
         <url-pattern>/delete-cookies</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>polycom</servlet-name>
+        <jsp-file>/client-polycom.pem</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>polycom</servlet-name>
+        <url-pattern>/polycom</url-pattern>
+    </servlet-mapping>
 </web-app>
